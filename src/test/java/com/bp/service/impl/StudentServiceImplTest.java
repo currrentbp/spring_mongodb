@@ -127,7 +127,7 @@ public class StudentServiceImplTest {
     public void insertAndFind(){
         MongoClient mongoClient = new MongoClient( "10.75.224.96" , 27017 );
         MongoDatabase database = mongoClient.getDatabase("currentbp");
-        database.createCollection("s4");
+        database.createCollection("s5");
         Document doc = new Document("name", "baopan")
                 .append("type", "+++++++++++++++++++++++++++++++")
                 .append("count", 1)
