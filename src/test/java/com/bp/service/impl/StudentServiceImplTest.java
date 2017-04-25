@@ -6,11 +6,13 @@ import com.bp.config.MongoService;
 import com.bp.entity.Student;
 import com.bp.service.StudentService;
 import com.mongodb.DB;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import com.mongodb.client.MongoCollection;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,6 +141,28 @@ public class StudentServiceImplTest {
 
         Document myDoc = collection.find().first();
         System.out.println(myDoc.toJson());
+    }
+
+
+    @Test
+    public void createStudentTable(){
+        try {
+            MongoService mongoService = new MongoService();
+            mongoService.useDatabase("currentbp").insertCollection("student");
+            //DBObject dbObject = (DBObject)JSON.parse(json);
+        }catch (Exception e){
+            Assert.assertTrue(false);
+        }
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void insertOneStudent(){
+        Student student = new Student();
+        student.setId("1");
+        student.setName("baopan");
+        MongoService mongoService = new MongoService();
+        mongoService.useDatabase("currentbp").getCollection("student").insertDocument(JSON.toJSONString(student));
     }
 
 }

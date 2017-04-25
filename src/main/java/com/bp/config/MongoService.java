@@ -1,6 +1,7 @@
 package com.bp.config;
 
 import com.alibaba.fastjson.JSON;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -51,13 +52,9 @@ public class MongoService {
     }
 
     public boolean insertDocument(String document) {
-        Document doc = new Document("name", "MongoDB")
-                .append("type", "database")
-                .append("count", 1)
-                .append("versions", Arrays.asList("v3.2", "v3.0", "v2.6"))
-                .append("info", new Document("x", 203).append("y", 102));
+        DBObject dbObject = (DBObject)JSON.parse(document);
         try {
-            mongoCollection.insertOne(document);
+            mongoCollection.insertOne(dbObject);
         } catch (Exception e) {
             System.out.println("===>insertDocument: error!! msg:" + e.getMessage());
             return false;
