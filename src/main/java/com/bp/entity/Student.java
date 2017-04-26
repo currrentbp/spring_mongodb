@@ -1,5 +1,8 @@
 package com.bp.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,9 +11,11 @@ import java.util.List;
  * @author current_bp
  * @createTime 20170323
  */
+@Document
 public class Student implements Serializable{
     private static final long serialVersionUID = -899638831466051308L;
 
+    @Id
     private String id;
     private String name;
     private String address;

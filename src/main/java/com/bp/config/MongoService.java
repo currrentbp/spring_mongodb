@@ -1,12 +1,15 @@
 package com.bp.config;
 
 import com.alibaba.fastjson.JSON;
+import com.bp.entity.Student;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.Arrays;
 
@@ -65,6 +68,8 @@ public class MongoService {
     public String findFirstDocument() {
         Document myDoc = (Document) mongoCollection.find().first();
         System.out.println("===>first:"+JSON.toJSONString(myDoc));
+
+        mongoCollection.find();
 
         FindIterable findIterable = mongoCollection.find();
         if (null == findIterable) {
