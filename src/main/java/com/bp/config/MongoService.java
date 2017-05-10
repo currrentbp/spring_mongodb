@@ -56,6 +56,7 @@ public class MongoService {
 
     public boolean insertDocument(String document) {
         DBObject dbObject = (DBObject)JSON.parse(document);
+
         try {
             mongoCollection.insertOne(dbObject);
         } catch (Exception e) {
