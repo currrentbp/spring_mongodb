@@ -42,12 +42,12 @@ public class StudentServiceImplTest {
     @Test
     public void insertStudent() throws Exception {
         Student student = new Student();
-        student.setId("1");
-        student.setName("name_1");
-        student.setAddress("address_1");
+        student.setId("2");
+        student.setName("name_2");
+        student.setAddress("address_2");
         List<String> stringList = new ArrayList();
-        stringList.add("s1");
-        stringList.add("s2");
+        stringList.add("s11");
+        stringList.add("s22");
         student.setHobbies(stringList);
 
         studentService.insertStudent(student);

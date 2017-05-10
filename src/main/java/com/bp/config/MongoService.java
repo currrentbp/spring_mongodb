@@ -1,6 +1,7 @@
 package com.bp.config;
 
 import com.alibaba.fastjson.JSON;
+import com.bp.EntityUtil;
 import com.bp.entity.Student;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
@@ -19,7 +20,7 @@ import java.util.Arrays;
  * @author current_bp
  * @createTime 20170425
  */
-public class MongoService {
+public class MongoService<T> {
 
     private MongoClient mongoClient;
     private MongoDatabase database;
@@ -54,11 +55,11 @@ public class MongoService {
         return this;
     }
 
-    public boolean insertDocument(String document) {
+    public boolean insertDocument(T document) {
 //        Document doc = new Document("_id", username).append("password", passwordHash);
 
         try {
-            mongoCollection.insertOne(document);
+            mongoCollection.insertOne(EntityUtil.getDocByEntity(document));
         } catch (Exception e) {
             System.out.println("===>insertDocument: error!! msg:" + e.getMessage());
             return false;

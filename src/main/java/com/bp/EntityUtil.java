@@ -25,7 +25,7 @@ public class EntityUtil {
             try {
                 field.setAccessible(true);
                 String name = field.getName();
-                String value = field.get(object).toString();
+                String value = null == field.get(object)? "" : field.get(object).toString();
                 System.out.println("name:"+name+" value:"+value);
                 document.append(field.getName(), field.get(object));
             } catch (IllegalAccessException e) {

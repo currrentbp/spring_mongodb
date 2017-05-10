@@ -5,6 +5,9 @@ import com.bp.entity.Student;
 import org.bson.Document;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -19,6 +22,10 @@ public class EntityUtilTest {
         student.setId("1");
         student.setName("baopan");
         student.setAddress("ADDRESS");
+        List<String> ho = new ArrayList<String>();
+        ho.add("111");
+        ho.add("222");
+        student.setHobbies(ho);
         Document document = EntityUtil.getDocByEntity(student);
         System.out.println("===>document:" + JSON.toJSONString(document));
 
