@@ -55,10 +55,10 @@ public class MongoService {
     }
 
     public boolean insertDocument(String document) {
-        DBObject dbObject = (DBObject)JSON.parse(document);
+//        Document doc = new Document("_id", username).append("password", passwordHash);
 
         try {
-            mongoCollection.insertOne(dbObject);
+            mongoCollection.insertOne(document);
         } catch (Exception e) {
             System.out.println("===>insertDocument: error!! msg:" + e.getMessage());
             return false;

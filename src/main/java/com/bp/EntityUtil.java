@@ -23,6 +23,10 @@ public class EntityUtil {
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             try {
+                field.setAccessible(true);
+                String name = field.getName();
+                String value = field.get(object).toString();
+                System.out.println("name:"+name+" value:"+value);
                 document.append(field.getName(), field.get(object));
             } catch (IllegalAccessException e) {
                 System.out.println("===>error: msg:" + e.getMessage());

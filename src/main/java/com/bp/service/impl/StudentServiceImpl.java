@@ -1,6 +1,8 @@
 package com.bp.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.bp.common.StudentCondition;
+import com.bp.config.MongoService;
 import com.bp.entity.Student;
 import com.bp.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,11 @@ public class StudentServiceImpl implements StudentService{
      */
     public int insertStudent(Student student) {
         try {
-            mongoTemplate.insert(student);
+//            mongoTemplate.insert(student);
+            MongoService mongoService = new MongoService().useDatabase("currentbp").getCollection("student");
+            mongoService.insertDocument(JSON.toJSONString(student));
         }catch (Exception e){
+            System.out.println("===>insertStudent: error!! msg:"+e.getMessage());
             return 0;
         }
         return 1;
