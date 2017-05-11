@@ -1,18 +1,10 @@
 package com.bp.config;
 
 import com.alibaba.fastjson.JSON;
-import com.bp.EntityUtil;
-import com.bp.entity.Student;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-
-import java.util.Arrays;
 
 /**
  * mongo 的相关操作
@@ -57,7 +49,6 @@ public class MongoService<T> {
 
     public boolean insertDocument(T document) {
         try {
-//            mongoCollection.insertOne(EntityUtil.getDocByEntity(document));//自己写的一个反射机制
             Document document1 = Document.parse(JSON.toJSONString(document));
             String id = JSON.parseObject(JSON.toJSONString(document)).getString("id");
             document1.append("_id",id);
