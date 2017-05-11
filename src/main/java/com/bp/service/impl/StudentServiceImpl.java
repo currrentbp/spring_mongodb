@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -19,8 +20,15 @@ import java.util.List;
 @Service("studentService")
 public class StudentServiceImpl implements StudentService{
 
-    @Autowired(required = false)
-    private MongoTemplate mongoTemplate;
+    private MongoService mongoService;
+
+    /**
+     * 初始化mongodb的链接
+     */
+    @PostConstruct
+    private void init(){
+        mongoService = new MongoService().useDatabase("currentbp").getCollection("student");
+    }
 
 
     /**
@@ -31,9 +39,7 @@ public class StudentServiceImpl implements StudentService{
      */
     public int insertStudent(Student student) {
         try {
-//            mongoTemplate.insert(student);
-            MongoService mongoService = new MongoService().useDatabase("currentbp").getCollection("student");
-            mongoService.insertDocument(JSON.toJSONString(student));
+            mongoService.insertDocument(student);
         }catch (Exception e){
             System.out.println("===>insertStudent: error!! msg:"+e.getMessage());
             return 0;
@@ -58,6 +64,16 @@ public class StudentServiceImpl implements StudentService{
      * @return 学生列表
      */
     public List<Student> getStudentByCondition(StudentCondition studentCondition) {
-        return mongoTemplate.find(new Query(),Student.class);
+        return null;
+    }
+
+    /**
+     * 根据ID获取学生
+     *
+     * @param id 学生id
+     * @return 学生
+     */
+    public Student getStudentById(String id) {
+        return (Student) mongoService.findDocumentById(id,Student.class);
     }
 }

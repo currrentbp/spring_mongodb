@@ -56,10 +56,12 @@ public class MongoService<T> {
     }
 
     public boolean insertDocument(T document) {
-//        Document doc = new Document("_id", username).append("password", passwordHash);
-
         try {
-            mongoCollection.insertOne(EntityUtil.getDocByEntity(document));
+//            mongoCollection.insertOne(EntityUtil.getDocByEntity(document));//自己写的一个反射机制
+            Document document1 = Document.parse(JSON.toJSONString(document));
+            String id = JSON.parseObject(JSON.toJSONString(document)).getString("id");
+            document1.append("_id",id);
+            mongoCollection.insertOne(document1);
         } catch (Exception e) {
             System.out.println("===>insertDocument: error!! msg:" + e.getMessage());
             return false;
@@ -67,20 +69,8 @@ public class MongoService<T> {
         return true;
     }
 
-    public String findFirstDocument() {
-        Document myDoc = (Document) mongoCollection.find().first();
-        System.out.println("===>first:"+JSON.toJSONString(myDoc));
-
-        mongoCollection.find();
-
-        FindIterable findIterable = mongoCollection.find();
-        if (null == findIterable) {
-            return null;
-        }
-
-        if (null == findIterable.first()) {
-            return null;
-        }
-        return findIterable.first().toString();
+    public <T> T findDocumentById(String id,Class<T> clazz) {
+        Document document = (Document) mongoCollection.find(new Document("id",id)).first();
+        return JSON.parseObject(document.toJson(),clazz);
     }
 }

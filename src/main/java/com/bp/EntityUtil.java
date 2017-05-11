@@ -39,6 +39,7 @@ public class EntityUtil {
     public static <T> T getBeanByDoc(Document document ,Class<T> clazz){
         T bean = null;
         try {
+            document.toString();
             bean = clazz.newInstance();
             Field[] fields = clazz.getDeclaredFields();// 获取所有属性
             Method[] methods = clazz.getMethods();

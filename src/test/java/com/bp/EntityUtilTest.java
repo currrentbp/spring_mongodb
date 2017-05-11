@@ -31,4 +31,9 @@ public class EntityUtilTest {
 
     }
 
+    @Test
+    public void getBeanByDoc() throws  Exception{
+
+    }
+
 }

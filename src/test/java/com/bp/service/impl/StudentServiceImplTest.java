@@ -42,17 +42,20 @@ public class StudentServiceImplTest {
     @Test
     public void insertStudent() throws Exception {
         Student student = new Student();
-        student.setId("2");
-        student.setName("name_2");
-        student.setAddress("address_2");
+        student.setId("5");
+        student.setName("name_5");
+        student.setAddress("address_5");
         List<String> stringList = new ArrayList();
-        stringList.add("s11");
-        stringList.add("s22");
+        stringList.add("s11345");
+        stringList.add("s22345");
         student.setHobbies(stringList);
 
         studentService.insertStudent(student);
+    }
 
-
+    @Test
+    public void findFirst() throws Exception{
+        System.out.println(JSON.toJSONString(studentService.getStudentById("5")));
     }
 
 

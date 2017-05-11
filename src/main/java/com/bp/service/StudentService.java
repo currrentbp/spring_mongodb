@@ -30,4 +30,11 @@ public interface StudentService {
      * @return 学生列表
      */
     List<Student> getStudentByCondition(StudentCondition studentCondition);
+
+    /**
+     * 根据ID获取学生
+     * @param id 学生id
+     * @return 学生
+     */
+    Student getStudentById(String id);
 }
