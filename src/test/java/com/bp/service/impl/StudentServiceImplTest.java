@@ -61,8 +61,8 @@ public class StudentServiceImplTest {
     @Test
     public void getStudentByCondition() {
         StudentCondition studentCondition = new StudentCondition();
-        studentCondition.setName("name_2");
-//        studentCondition.setAddress("address");
+        studentCondition.setName("name");
+        studentCondition.setAddress("address_3");
         System.out.println(JSON.toJSONString(studentService.getStudentByCondition(studentCondition)));
     }
 

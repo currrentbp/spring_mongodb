@@ -7,11 +7,13 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * mongo 的相关操作
@@ -77,17 +79,21 @@ public class MongoService<T> {
         BasicDBObject name = null;
         List<BasicDBObject> list = new ArrayList<BasicDBObject>();
         if (null != studentCondition.getName() && !"".equals(studentCondition.getName().trim())) {
-            name = new BasicDBObject("name", studentCondition.getName());
+            //模糊查询
+            Pattern pattern = Pattern.compile("^.*" + studentCondition.getName() + ".*$", Pattern.CASE_INSENSITIVE);
+            name = new BasicDBObject("name", pattern);
             list.add(name);
         }
         BasicDBObject address = null;
         if (null != studentCondition.getAddress() && !"".equals(studentCondition.getAddress())) {
-            address = new BasicDBObject("address", studentCondition.getAddress());
+            Pattern pattern = Pattern.compile("^.*" + studentCondition.getAddress() + ".*$", Pattern.CASE_INSENSITIVE);
+            address = new BasicDBObject("address", pattern);
             list.add(address);
         }
 
-        BasicDBObject andObj = new BasicDBObject("$and", list);
+        BasicDBObject andObj = new BasicDBObject("$and", list);//并列条件$and,或者：$or
         FindIterable<Document> fi = mongoCollection.find(andObj);
+        mongoCollection.find();
         if (null == fi) {
             return null;
         }
