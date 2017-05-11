@@ -58,5 +58,13 @@ public class StudentServiceImplTest {
         System.out.println(JSON.toJSONString(studentService.getStudentById("5")));
     }
 
+    @Test
+    public void getStudentByCondition() {
+        StudentCondition studentCondition = new StudentCondition();
+        studentCondition.setName("name_2");
+//        studentCondition.setAddress("address");
+        System.out.println(JSON.toJSONString(studentService.getStudentByCondition(studentCondition)));
+    }
+
 
 }

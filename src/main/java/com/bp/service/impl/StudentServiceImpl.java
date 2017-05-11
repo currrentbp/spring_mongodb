@@ -64,7 +64,7 @@ public class StudentServiceImpl implements StudentService{
      * @return 学生列表
      */
     public List<Student> getStudentByCondition(StudentCondition studentCondition) {
-        return null;
+        return mongoService.findDocumentByCondition(studentCondition,Student.class);
     }
 
     /**
