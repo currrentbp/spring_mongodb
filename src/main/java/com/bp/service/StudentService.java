@@ -22,7 +22,7 @@ public interface StudentService {
      * @param student 学生
      * @return 影响行数
      */
-    int updateStudent(Student student);
+    boolean updateStudent(Student student);
 
     /**
      * 根据条件获取学生列表

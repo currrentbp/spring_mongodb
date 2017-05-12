@@ -105,4 +105,23 @@ public class MongoService<T> {
         }
         return result;
     }
+
+    public boolean updateDocument(T document) {
+        try {
+            String allContent = JSON.toJSONString(document);
+            BasicDBObject query = new BasicDBObject();
+            query.put("id", JSON.parseObject(allContent).getString("id"));
+
+            BasicDBObject content = new BasicDBObject();
+            query.put("id", JSON.parseObject(allContent).getString("id"));
+
+            Document document1 = Document.parse(JSON.toJSONString(document));
+            String id = JSON.parseObject(JSON.toJSONString(document)).getString("id");
+            mongoCollection.insertOne(document1);
+        } catch (Exception e) {
+            System.out.println("===>insertDocument: error!! msg:" + e.getMessage());
+            return false;
+        }
+        return true;
+    }
 }

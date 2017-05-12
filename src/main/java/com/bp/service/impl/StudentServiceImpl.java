@@ -53,8 +53,8 @@ public class StudentServiceImpl implements StudentService{
      * @param student 学生
      * @return 影响行数
      */
-    public int updateStudent(Student student) {
-        return 0;
+    public boolean updateStudent(Student student) {
+        return mongoService.updateDocument(student);
     }
 
     /**
